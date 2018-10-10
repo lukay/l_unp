@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		4A06C175216DA28A003545BC /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = 4A06C174216DA28A003545BC /* main.c */; };
+		4AA3D325216DDCE6004D69B2 /* libunp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AA3D324216DDCE6004D69B2 /* libunp.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,9 @@
 /* Begin PBXFileReference section */
 		4A06C171216DA28A003545BC /* Server */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Server; sourceTree = BUILT_PRODUCTS_DIR; };
 		4A06C174216DA28A003545BC /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		4AA3D323216DDCBF004D69B2 /* unp.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = unp.h; path = unpv13e/lib/unp.h; sourceTree = SOURCE_ROOT; };
+		4AA3D324216DDCE6004D69B2 /* libunp.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libunp.a; path = unpv13e/libunp.a; sourceTree = SOURCE_ROOT; };
+		4AA3D326216DDDED004D69B2 /* config.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = config.h; path = unpv13e/config.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -32,6 +36,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4AA3D325216DDCE6004D69B2 /* libunp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -57,9 +62,20 @@
 		4A06C173216DA28A003545BC /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				4AA3D322216DDCA4004D69B2 /* libunp */,
 				4A06C174216DA28A003545BC /* main.c */,
 			);
 			path = Server;
+			sourceTree = "<group>";
+		};
+		4AA3D322216DDCA4004D69B2 /* libunp */ = {
+			isa = PBXGroup;
+			children = (
+				4AA3D324216DDCE6004D69B2 /* libunp.a */,
+				4AA3D326216DDDED004D69B2 /* config.h */,
+				4AA3D323216DDCBF004D69B2 /* unp.h */,
+			);
+			path = libunp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -240,6 +256,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/unpv13e",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -248,6 +268,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/unpv13e",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
