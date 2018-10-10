@@ -29,7 +29,7 @@ LIB_OBJS =  connect_nonb.o connect_timeo.o daemon_inetd.o daemon_init.o dg_cli.o
 LIBFREE_OBJS =  in_cksum.o inet_ntop.o inet_pton.o
 
 # Following are all the object files to create in the libgai/ directory.
-LIBGAI_OBJS = 
+LIBGAI_OBJS = getaddrinfo.o getnameinfo.o freeaddrinfo.o gai_strerror.o
 
 # Following are all the object files to create in the libroute/ directory.
 LIBROUTE_OBJS = get_rtaddrs.o if_indextoname.o if_nameindex.o if_nametoindex.o net_rt_iflist.o net_rt_dump.o sock_masktop.o
