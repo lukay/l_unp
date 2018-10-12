@@ -35,6 +35,13 @@ int main(int argc, const char * argv[]) {
 //
 //    return 0;
     
+//    char *ptr = getenv("LISTENQ");
+//    if (ptr == NULL) {
+//        printf("null");
+//    }
+//    printf("%s", ptr);
+//    return 0;
+    
     int                    sockfd, n;
     char                recvline[MAXLINE + 1];
     struct sockaddr_in    servaddr;
@@ -54,7 +61,7 @@ int main(int argc, const char * argv[]) {
     if (connect(sockfd, (SA *) &servaddr, sizeof(servaddr)) < 0)
         err_sys("connect error");
     
-    while ( (n = (int) read(sockfd, recvline, MAXLINE)) > 0) {
+    while ( (n = (int)read(sockfd, recvline, MAXLINE)) > 0) {
         recvline[n] = 0;    /* null terminate */
         if (fputs(recvline, stdout) == EOF)
             err_sys("fputs error");
