@@ -10,31 +10,31 @@
 
 int main(int argc, const char * argv[]) {
     // insert code here...
-    printf("Hello, World!\n");
-    int                    listenfd, connfd, i;
-    struct sockaddr_in    servaddr;
-    char                buff[MAXLINE];
-    time_t                ticks;
+    int                    listenfd, connfd;
+    pid_t                childpid;
+    socklen_t            clilen;
+    struct sockaddr_in    cliaddr, servaddr;
     
     listenfd = Socket(AF_INET, SOCK_STREAM, 0);
     
     bzero(&servaddr, sizeof(servaddr));
     servaddr.sin_family      = AF_INET;
     servaddr.sin_addr.s_addr = htonl(INADDR_ANY);
-    servaddr.sin_port        = htons(9999);
+    servaddr.sin_port        = htons(SERV_PORT);
     
     Bind(listenfd, (SA *) &servaddr, sizeof(servaddr));
     
     Listen(listenfd, LISTENQ);
     
     for ( ; ; ) {
-        connfd = Accept(listenfd, (SA *) NULL, NULL);
+        clilen = sizeof(cliaddr);
+        connfd = Accept(listenfd, (SA *) &cliaddr, &clilen);
         
-        ticks = time(NULL);
-        snprintf(buff, sizeof(buff), "%.24s\r\n", ctime(&ticks));
-        for (i = 0; i < strlen(buff); i++)
-            Write(connfd, &buff[i], 1);
-        
-        Close(connfd);
+        if ( (childpid = Fork()) == 0) {    /* child process */
+            Close(listenfd);    /* close listening socket */
+            str_echo(connfd);    /* process the request */
+            exit(0);
+        }
+        Close(connfd);            /* parent closes connected socket */
     }
 }
